@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skin Quiz — Find Your Perfect Routine | CasualMakeup</title>
+  <meta name="description" content="Take our 2-minute skin quiz to get a personalized casual makeup routine. Answer a few questions about your skin type, lifestyle, and budget to get custom product recommendations.">
+  <link rel="canonical" href="https://casualmakeup.com/quiz.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://casualmakeup.com/quiz.html">
+  <meta property="og:title" content="Skin Quiz — CasualMakeup">
+  <meta property="og:description" content="Find your perfect casual makeup routine in 2 minutes.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1200&q=80">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="CasualMakeup Home">Casual<span>Makeup</span></a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul>
+          <li><a href="/routines.html">Routines</a></li>
+          <li><a href="/#situations">Situations</a></li>
+          <li><a href="/#products">Products</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/quiz.html" class="active">Skin Quiz</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switcher">
+          <button class="lang-switcher__btn" aria-expanded="false" aria-haspopup="true" aria-label="Select language">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            EN
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="lang-switcher__dropdown" role="menu">
+            <a href="/" role="menuitem" class="active">English</a>
+            <a href="/es/" role="menuitem">Espanol</a>
+            <a href="/fr/" role="menuitem">Francais</a>
+          </div>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <ul>
+      <li><a href="/routines.html">Routines</a></li>
+      <li><a href="/#situations">Situations</a></li>
+      <li><a href="/#products">Products</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+      <li><a href="/quiz.html">Skin Quiz</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- Page Hero -->
+    <section class="page-hero page-hero--compact" aria-labelledby="quiz-hero-title">
+      <div class="container text-center">
+        <h1 id="quiz-hero-title" class="page-hero__title">Find your <em>perfect</em> routine</h1>
+        <p class="page-hero__subtitle">Answer 5 quick questions. Get a personalized casual makeup routine with exact product recommendations for your skin.</p>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section class="quiz-section section-padding">
+      <div class="container container--narrow">
+
+        <!-- Progress Bar -->
+        <div class="quiz-progress" aria-label="Quiz progress">
+          <div class="quiz-progress__bar">
+            <div class="quiz-progress__fill" id="quiz-progress-fill" style="width: 20%;"></div>
+          </div>
+          <div class="quiz-progress__text" id="quiz-progress-text">Question 1 of 5</div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div class="quiz-container" id="quiz-container">
+
+          <!-- Question 1: Skin Type -->
+          <div class="quiz-question active" data-question="1">
+            <h2 class="quiz-question__title">What's your skin type?</h2>
+            <p class="quiz-question__desc">Choose the one that describes your skin most days.</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-value="dry">
+                <span class="quiz-option__icon" aria-hidden="true">&#128167;</span>
+                <span class="quiz-option__label">Dry</span>
+                <span class="quiz-option__desc">Feels tight, flaky patches, needs moisture</span>
+              </button>
+              <button class="quiz-option" data-value="oily">
+                <span class="quiz-option__icon" aria-hidden="true">&#10024;</span>
+                <span class="quiz-option__label">Oily</span>
+                <span class="quiz-option__desc">Gets shiny by midday, especially T-zone</span>
+              </button>
+              <button class="quiz-option" data-value="combination">
+                <span class="quiz-option__icon" aria-hidden="true">&#9680;</span>
+                <span class="quiz-option__label">Combination</span>
+                <span class="quiz-option__desc">Oily T-zone, dry or normal cheeks</span>
+              </button>
+              <button class="quiz-option" data-value="normal">
+                <span class="quiz-option__icon" aria-hidden="true">&#127807;</span>
+                <span class="quiz-option__label">Normal</span>
+                <span class="quiz-option__desc">Balanced, not too oily or dry</span>
+              </button>
+              <button class="quiz-option" data-value="sensitive">
+                <span class="quiz-option__icon" aria-hidden="true">&#127800;</span>
+                <span class="quiz-option__label">Sensitive</span>
+                <span class="quiz-option__desc">Reacts easily, redness, needs gentle products</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Question 2: Time -->
+          <div class="quiz-question" data-question="2">
+            <h2 class="quiz-question__title">How much time do you have for makeup?</h2>
+            <p class="quiz-question__desc">Be honest. We won't judge.</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-value="3">
+                <span class="quiz-option__icon" aria-hidden="true">&#9889;</span>
+                <span class="quiz-option__label">3 minutes or less</span>
+                <span class="quiz-option__desc">I'm always running late</span>
+              </button>
+              <button class="quiz-option" data-value="5">
+                <span class="quiz-option__icon" aria-hidden="true">&#9201;</span>
+                <span class="quiz-option__label">About 5 minutes</span>
+                <span class="quiz-option__desc">The sweet spot for me</span>
+              </button>
+              <button class="quiz-option" data-value="7">
+                <span class="quiz-option__icon" aria-hidden="true">&#9200;</span>
+                <span class="quiz-option__label">7 minutes</span>
+                <span class="quiz-option__desc">I can spare a little extra time</span>
+              </button>
+              <button class="quiz-option" data-value="10">
+                <span class="quiz-option__icon" aria-hidden="true">&#127912;</span>
+                <span class="quiz-option__label">Up to 10 minutes</span>
+                <span class="quiz-option__desc">I want the full casual look</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Question 3: Budget -->
+          <div class="quiz-question" data-question="3">
+            <h2 class="quiz-question__title">What's your product budget?</h2>
+            <p class="quiz-question__desc">For a complete set of makeup products.</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-value="budget">
+                <span class="quiz-option__icon" aria-hidden="true">&#128176;</span>
+                <span class="quiz-option__label">Budget ($15&ndash;$30)</span>
+                <span class="quiz-option__desc">Drugstore and affordable brands</span>
+              </button>
+              <button class="quiz-option" data-value="mid">
+                <span class="quiz-option__icon" aria-hidden="true">&#128179;</span>
+                <span class="quiz-option__label">Mid-range ($30&ndash;$80)</span>
+                <span class="quiz-option__desc">Mix of drugstore and mid-tier brands</span>
+              </button>
+              <button class="quiz-option" data-value="premium">
+                <span class="quiz-option__icon" aria-hidden="true">&#128142;</span>
+                <span class="quiz-option__label">Premium ($80+)</span>
+                <span class="quiz-option__desc">I'll invest in quality products</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Question 4: Concern -->
+          <div class="quiz-question" data-question="4">
+            <h2 class="quiz-question__title">What's your biggest skin concern?</h2>
+            <p class="quiz-question__desc">Pick the one that bothers you most.</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-value="dark-circles">
+                <span class="quiz-option__icon" aria-hidden="true">&#128164;</span>
+                <span class="quiz-option__label">Dark circles</span>
+                <span class="quiz-option__desc">Always look tired</span>
+              </button>
+              <button class="quiz-option" data-value="redness">
+                <span class="quiz-option__icon" aria-hidden="true">&#127801;</span>
+                <span class="quiz-option__label">Redness / uneven tone</span>
+                <span class="quiz-option__desc">Patchy color, rosacea, irritation</span>
+              </button>
+              <button class="quiz-option" data-value="acne">
+                <span class="quiz-option__icon" aria-hidden="true">&#127807;</span>
+                <span class="quiz-option__label">Acne / breakouts</span>
+                <span class="quiz-option__desc">Active blemishes and texture</span>
+              </button>
+              <button class="quiz-option" data-value="aging">
+                <span class="quiz-option__icon" aria-hidden="true">&#10024;</span>
+                <span class="quiz-option__label">Fine lines / aging</span>
+                <span class="quiz-option__desc">Products settle into lines</span>
+              </button>
+              <button class="quiz-option" data-value="none">
+                <span class="quiz-option__icon" aria-hidden="true">&#128076;</span>
+                <span class="quiz-option__label">Nothing major</span>
+                <span class="quiz-option__desc">Just want a polished look</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Question 5: Undertone -->
+          <div class="quiz-question" data-question="5">
+            <h2 class="quiz-question__title">What's your skin undertone?</h2>
+            <p class="quiz-question__desc">Look at the veins on your inner wrist for a clue.</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-value="warm">
+                <span class="quiz-option__icon" aria-hidden="true">&#9728;&#65039;</span>
+                <span class="quiz-option__label">Warm</span>
+                <span class="quiz-option__desc">Green veins, gold jewelry looks best</span>
+              </button>
+              <button class="quiz-option" data-value="cool">
+                <span class="quiz-option__icon" aria-hidden="true">&#10052;&#65039;</span>
+                <span class="quiz-option__label">Cool</span>
+                <span class="quiz-option__desc">Blue/purple veins, silver jewelry looks best</span>
+              </button>
+              <button class="quiz-option" data-value="neutral">
+                <span class="quiz-option__icon" aria-hidden="true">&#9878;&#65039;</span>
+                <span class="quiz-option__label">Neutral</span>
+                <span class="quiz-option__desc">Mix of green and blue, both metals work</span>
+              </button>
+              <button class="quiz-option" data-value="olive">
+                <span class="quiz-option__icon" aria-hidden="true">&#127811;</span>
+                <span class="quiz-option__label">Olive</span>
+                <span class="quiz-option__desc">Greenish/yellowish tint to skin</span>
+              </button>
+              <button class="quiz-option" data-value="unsure">
+                <span class="quiz-option__icon" aria-hidden="true">&#129300;</span>
+                <span class="quiz-option__label">Not sure</span>
+                <span class="quiz-option__desc">I'll figure it out later</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quiz Results -->
+        <div class="quiz-results" id="quiz-results" style="display: none;">
+          <div class="quiz-results__header">
+            <h2 class="quiz-results__title">Your Personalized Routine</h2>
+            <p class="quiz-results__subtitle" id="quiz-results-summary"></p>
+          </div>
+
+          <div class="quiz-results__routine" id="quiz-results-routine"></div>
+
+          <div class="quiz-results__products" id="quiz-results-products"></div>
+
+          <div class="quiz-results__tips" id="quiz-results-tips"></div>
+
+          <div class="quiz-results__actions">
+            <button class="btn btn--primary btn--lg" id="quiz-restart">Take Quiz Again</button>
+            <a href="/routines.html" class="btn btn--secondary btn--lg">See All Routines</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo" aria-label="CasualMakeup Home">Casual<span>Makeup</span></a>
+          <p>Everyday makeup that actually looks good. Quick routines. Real skin. Every budget. Every tone.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Routines</h4>
+          <a href="/routines.html#3-minute">3-Minute Face</a>
+          <a href="/routines.html#5-minute">5-Minute Face</a>
+          <a href="/routines.html#7-minute">7-Minute Face</a>
+          <a href="/routines.html#10-minute">10-Minute Face</a>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="/blog.html">Blog</a>
+          <a href="/quiz.html">Skin Quiz</a>
+          <a href="/about.html">About Us</a>
+          <a href="/#gallery">Real Skin Gallery</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <a href="/#products">Product Finder</a>
+          <a href="/quiz.html">Undertone Quiz</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 CasualMakeup.com &mdash; Everyday beauty for women with real lives.</p>
+        <div class="footer-bottom__links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Accessibility</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

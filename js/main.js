@@ -586,6 +586,245 @@
   }
 
   // ============================================================
+  // BACK TO TOP BUTTON
+  // ============================================================
+  function initBackToTop() {
+    var btn = document.querySelector('.back-to-top');
+    if (!btn) return;
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          if (window.scrollY > 600) {
+            btn.classList.add('visible');
+          } else {
+            btn.classList.remove('visible');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ============================================================
+  // BLOG FILTERS
+  // ============================================================
+  function initBlogFilters() {
+    var filterBtns = document.querySelectorAll('.blog-filter-btn');
+    var blogCards = document.querySelectorAll('.blog-card');
+    if (!filterBtns.length || !blogCards.length) return;
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = btn.getAttribute('data-filter');
+
+        // Update active button
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        // Filter cards
+        blogCards.forEach(function (card) {
+          var category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = '';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(function () {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // ============================================================
+  // SKIN QUIZ
+  // ============================================================
+  function initQuiz() {
+    var container = document.getElementById('quiz-container');
+    var resultsEl = document.getElementById('quiz-results');
+    var progressFill = document.getElementById('quiz-progress-fill');
+    var progressText = document.getElementById('quiz-progress-text');
+    if (!container || !resultsEl) return;
+
+    var answers = {};
+    var currentQuestion = 1;
+    var totalQuestions = 5;
+
+    var questions = container.querySelectorAll('.quiz-question');
+    var options = container.querySelectorAll('.quiz-option');
+
+    options.forEach(function (option) {
+      option.addEventListener('click', function () {
+        var question = option.closest('.quiz-question');
+        var qNum = parseInt(question.getAttribute('data-question'), 10);
+        var value = option.getAttribute('data-value');
+
+        // Mark selected
+        question.querySelectorAll('.quiz-option').forEach(function (o) {
+          o.classList.remove('selected');
+        });
+        option.classList.add('selected');
+
+        // Store answer
+        answers[qNum] = value;
+
+        // Advance after brief delay
+        setTimeout(function () {
+          if (qNum < totalQuestions) {
+            currentQuestion = qNum + 1;
+            questions.forEach(function (q) { q.classList.remove('active'); });
+            var next = container.querySelector('[data-question="' + currentQuestion + '"]');
+            if (next) next.classList.add('active');
+
+            // Update progress
+            var pct = (currentQuestion / totalQuestions) * 100;
+            if (progressFill) progressFill.style.width = pct + '%';
+            if (progressText) progressText.textContent = 'Question ' + currentQuestion + ' of ' + totalQuestions;
+          } else {
+            // Show results
+            showQuizResults(answers);
+          }
+        }, 350);
+      });
+    });
+
+    // Restart button
+    var restartBtn = document.getElementById('quiz-restart');
+    if (restartBtn) {
+      restartBtn.addEventListener('click', function () {
+        answers = {};
+        currentQuestion = 1;
+        questions.forEach(function (q) { q.classList.remove('active'); });
+        questions[0].classList.add('active');
+        options.forEach(function (o) { o.classList.remove('selected'); });
+        if (progressFill) progressFill.style.width = '20%';
+        if (progressText) progressText.textContent = 'Question 1 of ' + totalQuestions;
+        resultsEl.style.display = 'none';
+        container.style.display = '';
+        document.querySelector('.quiz-progress').style.display = '';
+      });
+    }
+
+    function showQuizResults(a) {
+      container.style.display = 'none';
+      document.querySelector('.quiz-progress').style.display = 'none';
+      resultsEl.style.display = 'block';
+
+      var time = a[2] || '5';
+      var skinType = a[1] || 'normal';
+      var budget = a[3] || 'mid';
+      var concern = a[4] || 'none';
+      var undertone = a[5] || 'neutral';
+
+      var routineNames = { '3': 'The 3-Minute Face', '5': 'The 5-Minute Face', '7': 'The 7-Minute Face', '10': 'The 10-Minute Face' };
+      var budgetLabels = { 'budget': 'Budget-Friendly', 'mid': 'Mid-Range', 'premium': 'Premium' };
+
+      // Summary
+      var summary = document.getElementById('quiz-results-summary');
+      if (summary) {
+        summary.textContent = 'Based on your ' + skinType + ' skin, ' + time + '-minute timeline, and ' + (budgetLabels[budget] || 'mid-range') + ' budget, here\'s your ideal routine:';
+      }
+
+      // Routine recommendation
+      var routineEl = document.getElementById('quiz-results-routine');
+      if (routineEl) {
+        routineEl.innerHTML =
+          '<h3>' + (routineNames[time] || 'The 5-Minute Face') + '</h3>' +
+          '<p style="color: var(--color-text-light); font-size: var(--text-sm); margin-bottom: var(--space-md);">This routine is perfect for your lifestyle. ' + time + ' minutes, ' + (time <= 5 ? 'minimal products, maximum impact.' : 'a polished look that still feels effortless.') + '</p>' +
+          '<a href="/routines.html#' + time + '-minute" class="btn btn--accent btn--sm">See Full Routine Details</a>';
+      }
+
+      // Products
+      var productsEl = document.getElementById('quiz-results-products');
+      if (productsEl) {
+        var productRecs = getProductRecs(skinType, budget, concern);
+        productsEl.innerHTML =
+          '<h3>Recommended Products</h3>' +
+          '<div style="display: flex; flex-direction: column; gap: 0.75rem;">' +
+          productRecs.map(function (p) {
+            return '<div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; background: var(--color-bg-soft); border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">' +
+              '<div style="flex-shrink: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--color-accent); color: white; border-radius: 50%; font-size: 0.75rem; font-weight: 700;">' + p.step + '</div>' +
+              '<div><strong style="font-size: var(--text-sm);">' + p.name + '</strong>' +
+              '<div style="font-size: var(--text-xs); color: var(--color-text-light);">' + p.product + '</div></div></div>';
+          }).join('') + '</div>';
+      }
+
+      // Tips
+      var tipsEl = document.getElementById('quiz-results-tips');
+      if (tipsEl) {
+        var tip = getSkinTip(skinType, concern);
+        tipsEl.innerHTML = '<h3>Tip for Your Skin</h3><p>' + tip + '</p>';
+      }
+
+      // Scroll to results
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function getProductRecs(skinType, budget, concern) {
+      var base = [];
+      if (budget === 'budget') {
+        base = [
+          { step: 1, name: 'Tinted Moisturizer', product: 'CeraVe Hydrating Tinted SPF 30 (~$16)' },
+          { step: 2, name: 'Concealer', product: 'Maybelline Instant Age Rewind (~$10)' },
+          { step: 3, name: 'Cream Blush', product: 'e.l.f. Putty Blush (~$6)' },
+          { step: 4, name: 'Mascara', product: 'Essence Lash Princess (~$5)' },
+          { step: 5, name: 'Brow Gel + Lip', product: 'NYX Brow Glue (~$7) + Burt\'s Bees Tinted Lip Balm (~$5)' }
+        ];
+      } else if (budget === 'premium') {
+        base = [
+          { step: 1, name: 'Tinted Moisturizer', product: 'Chanel Les Beiges Water-Fresh Tint (~$70)' },
+          { step: 2, name: 'Concealer', product: 'Cle de Peau Concealer (~$75)' },
+          { step: 3, name: 'Cream Blush', product: 'Rare Beauty Soft Pinch (~$23)' },
+          { step: 4, name: 'Mascara', product: 'Lancome Lash Idole (~$28)' },
+          { step: 5, name: 'Brow Gel + Lip', product: 'Boy Brow by Glossier (~$18) + YSL Lip Stain (~$39)' }
+        ];
+      } else {
+        base = [
+          { step: 1, name: 'Tinted Moisturizer', product: 'Laura Mercier Tinted Moisturizer (~$49)' },
+          { step: 2, name: 'Concealer', product: 'NARS Radiant Creamy Concealer (~$32)' },
+          { step: 3, name: 'Cream Blush', product: 'Rare Beauty Soft Pinch (~$23)' },
+          { step: 4, name: 'Mascara', product: 'Glossier Lash Slick (~$16)' },
+          { step: 5, name: 'Brow Gel + Lip', product: 'Glossier Boy Brow (~$18) + Clinique Almost Lipstick (~$28)' }
+        ];
+      }
+
+      if (skinType === 'oily') {
+        base[0].product = base[0].product.replace(/\(/, '(oil-free, ');
+      }
+      return base;
+    }
+
+    function getSkinTip(skinType, concern) {
+      var tips = {
+        'dry': 'For dry skin, always apply moisturizer before your tinted moisturizer, and choose cream-based products over powders. A hydrating setting spray will keep everything looking dewy instead of flaky.',
+        'oily': 'For oily skin, use an oil-free or mattifying tinted moisturizer. Set your T-zone with a light dusting of translucent powder, but leave your cheeks dewy for dimension. Blotting papers are your midday best friend.',
+        'combination': 'Combination skin does best with a lightweight tinted moisturizer. Apply a tiny amount of powder to your T-zone only and let your cheeks stay naturally dewy. Cream blush works beautifully on your cheek area.',
+        'sensitive': 'Sensitive skin needs fragrance-free, mineral-based products. Look for tinted moisturizers with soothing ingredients like niacinamide or centella. Always patch test new products on your jawline first.',
+        'normal': 'Normal skin is the easiest to work with! You can use almost any formula. Focus on finding your perfect shade match and picking products with added skincare benefits like SPF or hyaluronic acid.'
+      };
+      var concernTips = {
+        'dark-circles': ' For dark circles, use a peach-toned corrector under your concealer for warm skin tones, or a pink/lavender corrector for cool tones.',
+        'redness': ' For redness, a green-tinted primer on affected areas before your base can neutralize redness. Choose a tinted moisturizer with buildable coverage.',
+        'acne': ' For acne-prone skin, make sure all products are non-comedogenic. Spot-conceal blemishes instead of layering heavy coverage everywhere.',
+        'aging': ' For mature skin, skip powder (it emphasizes lines) and use cream everything. A luminous tinted moisturizer adds a youthful glow.',
+        'none': ''
+      };
+      return (tips[skinType] || tips['normal']) + (concernTips[concern] || '');
+    }
+  }
+
+  // ============================================================
   // INITIALIZE ALL
   // ============================================================
   function init() {
@@ -604,6 +843,9 @@
     initToolCards();
     initNavHighlight();
     initLazyLoading();
+    initBackToTop();
+    initBlogFilters();
+    initQuiz();
   }
 
   // Run on DOM ready
